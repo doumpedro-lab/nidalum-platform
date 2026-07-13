@@ -28,14 +28,14 @@ export async function POST(request: Request) {
               description: 'Le Grand Codex NIDALUM - Édition Limitée.',
               images: ['https://nidalumuniverse.com/images/codex-real.jpg'],
             },
-            unit_amount: 14900, // 149.00 EUR
+            unit_amount: 9900, // 99.00 EUR
           },
           quantity: 1,
         },
       ],
       mode: 'payment',
       success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/merci?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/sanctuaire`,
+      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/`,
     });
 
     return NextResponse.json({ url: session.url }, { status: 200 });

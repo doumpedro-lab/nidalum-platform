@@ -82,11 +82,12 @@ export default function Footer() {
             <ul className="space-y-4 text-[#a3a3a3] text-sm font-light">
               <li><a href="/manifesto" className="hover:text-gold transition-all duration-300 block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded px-1">Notre Manifeste</a></li>
               <li><a href="/about" className="hover:text-gold transition-all duration-300 block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded px-1">À propos</a></li>
-              <li><span aria-disabled="true" className="opacity-40 cursor-not-allowed block px-1">Contact</span></li>
+              <li><a href="/contact" className="hover:text-gold transition-all duration-300 block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded px-1">Contact</a></li>
               <li><span aria-disabled="true" className="opacity-40 cursor-not-allowed block px-1">Presse</span></li>
               <li><span aria-disabled="true" className="opacity-40 cursor-not-allowed block px-1">Partenaires</span></li>
-              <li><span aria-disabled="true" className="opacity-40 cursor-not-allowed block px-1">Mentions légales</span></li>
-              <li><span aria-disabled="true" className="opacity-40 cursor-not-allowed block px-1">Confidentialité</span></li>
+              <li><a href="/legal/cgv" className="hover:text-gold transition-all duration-300 block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded px-1">CGV</a></li>
+              <li><a href="/legal/mentions-legales" className="hover:text-gold transition-all duration-300 block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded px-1">Mentions légales</a></li>
+              <li><a href="/legal/politique-confidentialite" className="hover:text-gold transition-all duration-300 block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded px-1">Confidentialité</a></li>
             </ul>
           </div>
         </div>

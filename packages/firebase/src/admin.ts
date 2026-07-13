@@ -16,5 +16,14 @@ if (!getApps().length) {
   }
 }
 
-export const adminDb = getFirestore();
-export const adminAuth = getAuth();
+let adminDb: any;
+let adminAuth: any;
+
+try {
+  adminDb = getFirestore();
+  adminAuth = getAuth();
+} catch (error) {
+  console.warn('Firebase Admin services initialization skipped during build');
+}
+
+export { adminDb, adminAuth };

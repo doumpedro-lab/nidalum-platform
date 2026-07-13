@@ -51,7 +51,7 @@ export async function POST(request: Request) {
               <p>Guardian ID : <strong>${guardianId}</strong></p>
               <p>Le monde entier est une machine à voler votre attention.</p>
               <p>Bienvenue dans la Rébellion.</p>
-              <p><a href="https://nidalumuniverse.com/sanctuaire" style="color: #D4AF37;">Accéder au Sanctuaire</a></p>
+              <p><a href="https://nidalumuniverse.com/codex" style="color: #D4AF37;">Accéder au Codex</a></p>
             </div>
           `
         });
