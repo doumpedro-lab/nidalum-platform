@@ -4,9 +4,11 @@ export default function ContactPage() {
       <div className="max-w-3xl mx-auto space-y-12">
         <h1 className="text-4xl font-playfair text-gold mb-12">CONTACT</h1>
         <div className="font-mono text-white/80 space-y-8 leading-relaxed">
-          <p>Pour toute requête technique, accès ou presse :</p>
-          <div className="border border-white/20 p-8">
-            <p className="text-gold">contact@nidalumuniverse.com</p>
+          <div className="border border-white/20 p-8 space-y-4">
+            <p className="text-gold flex items-center gap-4"><span className="text-white/50 w-24">Email :</span> contact@nidalumuniverse.com</p>
+            <p className="text-gold flex items-center gap-4"><span className="text-white/50 w-24">Téléphone :</span> +49 15563 655924</p>
+            <p className="text-gold flex items-center gap-4"><span className="text-white/50 w-24">Web :</span> www.nidalumuniverse.com</p>
+            <p className="text-gold flex items-center gap-4"><span className="text-white/50 w-24">Siège :</span> Allemagne</p>
           </div>
           <p className="text-sm text-white/50">
             Nous répondons exclusivement aux membres enregistrés et aux partenaires approuvés.
