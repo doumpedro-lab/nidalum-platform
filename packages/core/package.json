@@ -1,0 +1,12 @@
+{
+  "name": "@nidalum/core",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "dependencies": {
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/uuid": "^10.0.0",
+    "typescript": "^5.0.0"
+  }
+}

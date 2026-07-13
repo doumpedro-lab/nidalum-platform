@@ -19,7 +19,12 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@nidalum/core": ["../../packages/core/src/index.ts"],
+      "@nidalum/services": ["../../packages/services/src/index.ts"],
+      "@nidalum/repositories": ["../../packages/repositories/src/index.ts"],
+      "@nidalum/analytics": ["../../packages/analytics/src/index.ts"],
+      "@nidalum/firebase/*": ["../../packages/firebase/*"]
     }
   },
   "include": [

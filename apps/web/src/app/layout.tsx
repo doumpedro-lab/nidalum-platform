@@ -75,6 +75,10 @@ export const metadata: Metadata = {
   },
 };
 
+import AmbientPlayer from "../components/AmbientPlayer";
+import { GrainOverlay } from "../components/GrainOverlay";
+import AnalyticsScripts from "../components/AnalyticsScripts";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -108,8 +112,11 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col bg-[#050505] text-white selection:bg-gold selection:text-black">
+      <body className="min-h-full flex flex-col bg-[#050505] text-white selection:bg-gold selection:text-black relative">
+        <GrainOverlay />
         {children}
+        <AmbientPlayer />
+        <AnalyticsScripts />
       </body>
     </html>
   );

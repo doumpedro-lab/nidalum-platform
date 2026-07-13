@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "dev": "nidalum-dev",
+    "staging": "nidalum-staging",
+    "prod": "nidalum-prod"
+  }
+}

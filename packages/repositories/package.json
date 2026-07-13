@@ -1,0 +1,12 @@
+{
+  "name": "@nidalum/repositories",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@nidalum/firebase": "*",
+    "@nidalum/core": "*"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

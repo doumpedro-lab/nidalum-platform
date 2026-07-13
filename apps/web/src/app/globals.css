@@ -11,6 +11,19 @@
   --font-primary: var(--font-inter), sans-serif;
   --font-serif: var(--font-playfair), serif;
   --font-mono: var(--font-mono), monospace;
+
+  --animate-breathe: breathe 15s ease-in-out infinite;
+  
+  @keyframes breathe {
+    0%, 100% {
+      border-color: rgba(212, 175, 55, 0.2);
+      box-shadow: 0 5px 20px rgba(212, 175, 55, 0.05);
+    }
+    50% {
+      border-color: rgba(212, 175, 55, 0.6);
+      box-shadow: 0 5px 40px rgba(212, 175, 55, 0.25);
+    }
+  }
 }
 
 @layer base {

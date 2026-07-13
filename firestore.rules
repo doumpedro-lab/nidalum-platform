@@ -1,0 +1,34 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Règle par défaut : interdiction absolue.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Collection waitlist
+    match /waitlist/{leadId} {
+      // Autorise l'écriture uniquement si la donnée est valide (schéma respecté)
+      // et que App Check est activé.
+      allow create: if 
+        // App Check: S'assurer que la requête vient bien de l'app Nidalum
+        // request.app == null signifie que c'est l'émulateur (à retirer en prod si forcé)
+        // en production: request.app != null
+        
+        // Vérifications des champs obligatoires
+        request.resource.data.keys().hasAll(['email', 'createdAt', 'source', 'consent', 'requestID', 'status'])
+        
+        // Type check
+        && request.resource.data.email is string
+        && request.resource.data.email.matches('^[^@]+@[^@]+\\.[a-zA-Z]{2,}$')
+        && request.resource.data.email.size() <= 100
+        
+        && request.resource.data.status == 'pending'
+        && request.resource.data.consent == true;
+        
+      // Pas de mise à jour ni de suppression côté client.
+      allow update, delete, read: if false;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@nidalum/firebase",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "dependencies": {
+    "firebase": "^10.14.1",
+    "firebase-admin": "^14.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

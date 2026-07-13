@@ -15,6 +15,7 @@ const cspHeader = `
 `;
 
 const nextConfig: NextConfig = {
+  transpilePackages: ["@nidalum/core", "@nidalum/services", "@nidalum/repositories", "@nidalum/analytics", "@nidalum/firebase"],
   async headers() {
     return [
       {
