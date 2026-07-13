@@ -9,7 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@nidalum/firebase": "*",
+    "@nidalum/firebase": "workspace:*",
     "@opentelemetry/api": "^1.9.1",
     "@splinetool/react-spline": "^4.1.0",
     "@splinetool/runtime": "^1.12.98",

@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "src/index.ts",
   "dependencies": {
-    "@nidalum/core": "*",
-    "@nidalum/repositories": "*",
-    "@nidalum/analytics": "*"
+    "@nidalum/core": "workspace:*",
+    "@nidalum/repositories": "workspace:*",
+    "@nidalum/analytics": "workspace:*"
   },
   "devDependencies": {
     "typescript": "^5.0.0"
