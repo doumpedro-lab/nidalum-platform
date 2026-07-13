@@ -12,7 +12,7 @@ export default function PolitiqueConfidentialitePage() {
           <p>Nous utilisons des outils d'analyse (Microsoft Clarity, GA4) de manière anonymisée pour comprendre l'utilisation du système NIDALUM et améliorer l'expérience. Vous pouvez vous y opposer via les paramètres de votre navigateur.</p>
           
           <h2 className="text-xl text-gold mt-8 mb-4">Vos Droits</h2>
-          <p>Vous disposez d'un droit d'accès, de rectification et de suppression de vos données en contactant transmission@nidalumuniverse.com.</p>
+          <p>Vous disposez d'un droit d'accès, de rectification et de suppression de vos données en contactant contact@nidalumuniverse.com.</p>
         </div>
       </div>
     </main>

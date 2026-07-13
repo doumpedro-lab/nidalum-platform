@@ -6,7 +6,7 @@ export default function ContactPage() {
         <div className="font-mono text-white/80 space-y-8 leading-relaxed">
           <p>Pour toute requête technique, accès ou presse :</p>
           <div className="border border-white/20 p-8">
-            <p className="text-gold">transmission@nidalumuniverse.com</p>
+            <p className="text-gold">contact@nidalumuniverse.com</p>
           </div>
           <p className="text-sm text-white/50">
             Nous répondons exclusivement aux membres enregistrés et aux partenaires approuvés.
