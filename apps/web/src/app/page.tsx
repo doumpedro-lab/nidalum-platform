@@ -119,10 +119,10 @@ export default function LandingPage() {
 
       {/* PORTE 00 — SILENCE (HERO) */}
       <section className="relative min-h-[100vh] flex flex-col justify-start items-center text-center px-4 pt-32 pb-32 overflow-hidden">
-        <div className="absolute inset-0 w-full h-full z-0 pointer-events-auto opacity-20 filter brightness-[0.2] contrast-125 saturate-0">
+        <div className="absolute inset-0 w-full h-full z-0 pointer-events-auto opacity-70 mix-blend-screen">
           <Spline scene="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode" />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#050505]/80 to-[#050505] pointer-events-none z-0"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#050505]/60 to-[#050505] pointer-events-none z-0"></div>
 
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
@@ -142,25 +142,28 @@ export default function LandingPage() {
             Édition Fondatrice Limitée
           </p>
           
-          <div className="flex justify-center items-center mb-16 pointer-events-auto">
-            <button onClick={() => document.getElementById('offer')?.scrollIntoView({ behavior: 'smooth' })} className="px-8 py-4 border border-gold/40 text-gold hover:bg-gold hover:text-black uppercase tracking-widest text-sm transition-all duration-300 bg-transparent backdrop-blur-sm">
+          <div className="flex justify-center items-center pointer-events-auto">
+            <button onClick={() => document.getElementById('offer')?.scrollIntoView({ behavior: 'smooth' })} className="px-8 py-4 border border-nidalum-gold/40 text-nidalum-gold hover:bg-nidalum-gold hover:text-black uppercase tracking-widest text-sm transition-all duration-300 bg-transparent backdrop-blur-sm shadow-[0_0_20px_rgba(255,248,231,0.1)]">
               Access the Founder Library
             </button>
           </div>
         </motion.div>
 
         <motion.div 
-          initial={{ opacity: 0, y: 100 }}
+          initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute bottom-[-15%] left-1/2 transform -translate-x-1/2 w-[90%] md:w-[40%] max-w-lg z-20 pointer-events-auto"
+          className="relative mt-16 w-[90%] md:w-[40%] max-w-sm z-20 pointer-events-auto"
         >
-          <TiltImage src="" alt="EBOOK NIDALUM" sizes="(max-width: 768px) 90vw, 40vw" className="w-full aspect-[3/4]">
+          <TiltImage src="" alt="EBOOK NIDALUM" sizes="(max-width: 768px) 90vw, 40vw" className="w-full aspect-[3/4] group cursor-pointer hover:shadow-[0_20px_80px_rgba(255,248,231,0.15)] transition-shadow duration-500">
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 z-20 pointer-events-none">
-              <h2 className="text-nidalum-gold font-serif text-4xl md:text-6xl uppercase tracking-[0.2em] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] opacity-90">NIDALUM</h2>
-              <div className="h-[1px] w-16 bg-nidalum-gold opacity-50 my-6"></div>
-              <p className="text-white font-mono text-sm tracking-[0.4em] uppercase opacity-90">ÉCOSYSTÈME</p>
+              <h2 className="text-nidalum-gold font-serif text-3xl md:text-5xl uppercase tracking-[0.2em] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] opacity-100 group-hover:scale-105 transition-transform duration-500">NIDALUM</h2>
+              <div className="h-[1px] w-16 bg-nidalum-gold opacity-60 my-6"></div>
+              <p className="text-white font-mono text-xs md:text-sm tracking-[0.4em] uppercase opacity-90">ÉCOSYSTÈME</p>
             </div>
+            
+            {/* Animated border pulse on hover */}
+            <div className="absolute inset-0 border border-nidalum-gold/0 group-hover:border-nidalum-gold/40 transition-colors duration-500 rounded-xl mix-blend-overlay"></div>
           </TiltImage>
         </motion.div>
       </section>
