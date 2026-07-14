@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Glyph } from '../../components/Glyph';
 import { useRouter } from 'next/navigation';
-import { auth, db } from '@nidalum/firebase';
+import { auth, db } from '@nidalum/firebase/src/client';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
 
