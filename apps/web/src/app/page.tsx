@@ -53,9 +53,12 @@ const TiltImage = ({ src, alt, className, sizes = "100vw", children }: { src: st
       }}
       className={`relative rounded-xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.8)] border border-nidalum-gold/20 bg-nidalum-black/80 backdrop-blur-md flex items-center justify-center ${className}`}
     >
-      {children}
+      {src && <Image src={src} alt={alt} fill className="object-cover z-0 opacity-80" sizes={sizes} />}
+      <div className="relative z-10 flex flex-col items-center justify-center w-full h-full">
+        {children}
+      </div>
       <motion.div 
-        className="absolute inset-0 z-10 pointer-events-none mix-blend-overlay"
+        className="absolute inset-0 z-20 pointer-events-none mix-blend-overlay"
         style={{
           background: `radial-gradient(circle at ${glareX} ${glareY}, rgba(255, 255, 255, 0.15) 0%, transparent 50%)`
         }}
@@ -180,11 +183,11 @@ export default function LandingPage() {
             transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
             className="w-[90%] md:w-[40%] max-w-sm z-20 pointer-events-auto"
           >
-            <TiltImage src="" alt="EBOOK NIDALUM" sizes="(max-width: 768px) 90vw, 40vw" className="w-full aspect-[3/4] group cursor-pointer hover:shadow-[0_20px_80px_rgba(255,248,231,0.15)] transition-shadow duration-500 border border-nidalum-gold/20 bg-[#050505]">
-              <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 z-20 pointer-events-none">
-                <h2 className="text-nidalum-gold font-serif text-3xl md:text-5xl uppercase tracking-[0.2em] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] opacity-100 group-hover:scale-105 transition-transform duration-500">NIDALUM</h2>
-                <div className="h-[1px] w-16 bg-nidalum-gold opacity-60 my-6"></div>
-                <p className="text-white font-mono text-xs md:text-sm tracking-[0.4em] uppercase opacity-90">ÉCOSYSTÈME</p>
+            <TiltImage src="/images/le_grand_livre.png" alt="EBOOK NIDALUM" sizes="(max-width: 768px) 90vw, 40vw" className="w-full aspect-[3/4] group cursor-pointer hover:shadow-[0_20px_80px_rgba(255,248,231,0.15)] transition-shadow duration-500 border border-nidalum-gold/20 bg-[#050505]">
+              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black via-black/80 to-transparent p-8 z-20 pointer-events-none">
+                <h2 className="text-nidalum-gold font-serif text-2xl md:text-3xl uppercase tracking-[0.1em] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] opacity-100 group-hover:scale-105 transition-transform duration-500">LE GRAND LIVRE</h2>
+                <div className="h-[1px] w-16 bg-nidalum-gold opacity-60 my-4"></div>
+                <p className="text-white font-mono text-xs md:text-sm tracking-[0.2em] uppercase opacity-90">DES MYSTÈRES CACHÉS DE L'HUMANITÉ</p>
               </div>
             </TiltImage>
           </motion.div>
@@ -248,12 +251,10 @@ export default function LandingPage() {
             
           </div>
           <div className="w-full md:w-1/2 perspective-[1200px]">
-             <TiltImage src="" alt="Le Sceau Nidalum" sizes="(max-width: 768px) 100vw, 50vw" className="w-full aspect-[3/4]">
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 z-20 pointer-events-none">
-                  <div className="w-24 h-24 border border-gold/30 rounded-full flex items-center justify-center mb-6">
-                    <Glyph size={32} className="text-gold opacity-80" />
-                  </div>
-                  <p className="text-gold font-mono text-[10px] tracking-[0.4em] uppercase opacity-60">Pack Fondateur</p>
+             <TiltImage src="/images/52_histoires.png" alt="Nidalum 52 Histoires" sizes="(max-width: 768px) 100vw, 50vw" className="w-full aspect-[3/4]">
+                <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black via-black/80 to-transparent p-8 z-20 pointer-events-none text-left">
+                  <h2 className="text-nidalum-gold font-serif text-xl md:text-2xl uppercase tracking-[0.1em] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">52 HISTOIRES QUI RÉVEILLENT</h2>
+                  <p className="text-white font-mono text-[10px] tracking-[0.2em] uppercase opacity-90 mt-2">LE CRÉATEUR INTÉRIEUR</p>
                 </div>
              </TiltImage>
           </div>
