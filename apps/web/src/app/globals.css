@@ -2,8 +2,8 @@
 
 @theme {
   --color-onyx: #050505;
-  --color-gold: #D4AF37;
-  --color-gold-dim: #A88623;
+  --color-gold: #FFF8E7; /* Nidalum Ivory */
+  --color-gold-dim: #E6DFCE; /* Dim Ivory */
   --color-mineral: #F5F5F5;
   --color-dim: #888888;
   --color-border: #1A1A1A;
