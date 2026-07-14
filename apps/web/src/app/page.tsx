@@ -159,7 +159,7 @@ export default function LandingPage() {
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 z-20 pointer-events-none">
               <h2 className="text-nidalum-gold font-serif text-4xl md:text-6xl uppercase tracking-[0.2em] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] opacity-90">NIDALUM</h2>
               <div className="h-[1px] w-16 bg-nidalum-gold opacity-50 my-6"></div>
-              <p className="text-white font-mono text-sm tracking-[0.4em] uppercase opacity-90">EBOOK</p>
+              <p className="text-white font-mono text-sm tracking-[0.4em] uppercase opacity-90">ÉCOSYSTÈME</p>
             </div>
           </TiltImage>
         </motion.div>
@@ -184,7 +184,7 @@ export default function LandingPage() {
                   <span className="flex items-center gap-3"><Glyph size={12} className="text-gold"/> Accès à la Founder Library</span>
                 </li>
                 <li className="flex flex-col border-b border-[#1A1A1A] pb-3">
-                  <span className="flex items-center gap-3"><Glyph size={12} className="text-nidalum-gold"/> L'Univers NIDALUM (Plusieurs Livres, Ebooks & PDFs inclus)</span>
+                  <span className="flex items-center gap-3"><Glyph size={12} className="text-nidalum-gold"/> L'Écosystème NIDALUM (Ouvrages, Outils & Fréquences)</span>
                 </li>
                 <li className="flex items-center justify-between border-b border-[#1A1A1A] pb-3 mt-3">
                   <span className="flex items-center gap-3"><Glyph size={12} className="text-gold"/> Lecture Web immersive</span>
