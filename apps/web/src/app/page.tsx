@@ -49,14 +49,13 @@ const TiltImage = ({ src, alt, className, sizes = "100vw", children }: { src: st
         transformStyle: "preserve-3d",
         perspective: 1200
       }}
-      className={`relative rounded-xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.8)] border border-[#222222] ${className}`}
+      className={`relative rounded-xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.8)] border border-nidalum-gold/20 bg-nidalum-black/80 backdrop-blur-md flex items-center justify-center ${className}`}
     >
-      <Image src={src} alt={alt} fill sizes={sizes} className="object-cover" priority />
       {children}
       <motion.div 
         className="absolute inset-0 z-10 pointer-events-none mix-blend-overlay"
         style={{
-          background: `radial-gradient(circle at ${glareX} ${glareY}, rgba(255, 255, 255, 0.08) 0%, transparent 50%)`
+          background: `radial-gradient(circle at ${glareX} ${glareY}, rgba(255, 255, 255, 0.15) 0%, transparent 50%)`
         }}
       />
     </motion.div>
@@ -156,11 +155,11 @@ export default function LandingPage() {
           transition={{ delay: 1, duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
           className="absolute bottom-[-15%] left-1/2 transform -translate-x-1/2 w-[90%] md:w-[40%] max-w-lg z-20 pointer-events-auto"
         >
-          <TiltImage src="/images/grimoire_front.png" alt="La Bibliothèque Nidalum" sizes="(max-width: 768px) 90vw, 40vw" className="w-full aspect-[3/4]">
+          <TiltImage src="" alt="EBOOK NIDALUM" sizes="(max-width: 768px) 90vw, 40vw" className="w-full aspect-[3/4]">
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 z-20 pointer-events-none">
-              <h2 className="text-gold font-serif text-3xl md:text-5xl uppercase tracking-[0.2em] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] mt-[-10%] opacity-90">NIDALUM</h2>
-              <div className="h-[1px] w-12 bg-gold opacity-50 my-4"></div>
-              <p className="text-white font-mono text-[10px] md:text-xs tracking-[0.3em] uppercase opacity-70">Founder Library</p>
+              <h2 className="text-nidalum-gold font-serif text-4xl md:text-6xl uppercase tracking-[0.2em] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] opacity-90">NIDALUM</h2>
+              <div className="h-[1px] w-16 bg-nidalum-gold opacity-50 my-6"></div>
+              <p className="text-white font-mono text-sm tracking-[0.4em] uppercase opacity-90">EBOOK</p>
             </div>
           </TiltImage>
         </motion.div>
