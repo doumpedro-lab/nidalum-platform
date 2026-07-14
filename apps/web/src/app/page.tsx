@@ -184,14 +184,7 @@ export default function LandingPage() {
                   <span className="flex items-center gap-3"><Glyph size={12} className="text-gold"/> Accès à la Founder Library</span>
                 </li>
                 <li className="flex flex-col border-b border-[#1A1A1A] pb-3">
-                  <span className="flex items-center gap-3"><Glyph size={12} className="text-gold"/> Les 5 Tomes Premiums :</span>
-                  <div className="pl-6 mt-3 space-y-2 text-[#a3a3a3] text-sm font-serif italic">
-                    <p>I. Le Livre d'Apprentissage</p>
-                    <p>II. Le Grand Codex</p>
-                    <p>III. L'Éveil du Prédateur Pacifique</p>
-                    <p>IV. L'Art de l'Interrupteur Mental</p>
-                    <p>V. La Stratégie du Silence</p>
-                  </div>
+                  <span className="flex items-center gap-3"><Glyph size={12} className="text-nidalum-gold"/> Ebook NIDALUM Intégral</span>
                 </li>
                 <li className="flex items-center justify-between border-b border-[#1A1A1A] pb-3 mt-3">
                   <span className="flex items-center gap-3"><Glyph size={12} className="text-gold"/> Lecture Web immersive</span>
@@ -238,7 +231,7 @@ export default function LandingPage() {
             
           </div>
           <div className="w-full md:w-1/2 perspective-[1200px]">
-             <TiltImage src="/images/grimoire_back.png" alt="Le Sceau Nidalum" sizes="(max-width: 768px) 100vw, 50vw" className="w-full aspect-[3/4]">
+             <TiltImage src="" alt="Le Sceau Nidalum" sizes="(max-width: 768px) 100vw, 50vw" className="w-full aspect-[3/4]">
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 z-20 pointer-events-none">
                   <div className="w-24 h-24 border border-gold/30 rounded-full flex items-center justify-center mb-6">
                     <Glyph size={32} className="text-gold opacity-80" />
