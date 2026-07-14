@@ -146,8 +146,8 @@ export default function LandingPage() {
           </p>
           
           <div className="flex justify-center items-center mb-16 pointer-events-auto">
-            <button onClick={() => document.getElementById('offer')?.scrollIntoView({ behavior: 'smooth' })} className="border-b border-gold text-gold pb-1 uppercase tracking-widest text-sm hover:text-white hover:border-white transition-all">
-              Découvrir
+            <button onClick={() => document.getElementById('offer')?.scrollIntoView({ behavior: 'smooth' })} className="px-8 py-4 border border-gold/40 text-gold hover:bg-gold hover:text-black uppercase tracking-widest text-sm transition-all duration-300 bg-transparent backdrop-blur-sm">
+              Access the Founder Library
             </button>
           </div>
         </motion.div>
@@ -168,7 +168,6 @@ export default function LandingPage() {
         </motion.div>
       </section>
 
-
       {/* PORTE 01 — LE PACK COMPLET */}
       <section id="offer" className="py-32 md:py-40 px-6 bg-[#0a0a0a] relative z-20 border-t border-[#111111]">
         <div className="max-w-6xl mx-auto px-6 py-12 flex flex-col-reverse md:flex-row items-center gap-12 md:gap-24">
@@ -182,15 +181,22 @@ export default function LandingPage() {
             </p>
             
             <div className="bg-[#050505] border border-[#1A1A1A] p-8 mb-10">
-              <h3 className="text-gold font-mono text-xs tracking-widest uppercase mb-6">Ce que vous recevez immédiatement :</h3>
+              <h3 className="text-gold font-mono text-xs tracking-widest uppercase mb-6">Ce que vous recevez :</h3>
               <ul className="space-y-5 text-white font-light text-[15px]">
-                <li className="flex items-center justify-between border-b border-[#1A1A1A] pb-3">
+                <li className="flex flex-col border-b border-[#1A1A1A] pb-3">
                   <span className="flex items-center gap-3"><Glyph size={12} className="text-gold"/> Accès à la Founder Library</span>
                 </li>
-                <li className="flex items-center justify-between border-b border-[#1A1A1A] pb-3">
-                  <span className="flex items-center gap-3"><Glyph size={12} className="text-gold"/> 5 livres Premium</span>
+                <li className="flex flex-col border-b border-[#1A1A1A] pb-3">
+                  <span className="flex items-center gap-3"><Glyph size={12} className="text-gold"/> Les 5 Tomes Premiums :</span>
+                  <div className="pl-6 mt-3 space-y-2 text-[#a3a3a3] text-sm font-serif italic">
+                    <p>I. Le Livre d'Apprentissage</p>
+                    <p>II. Le Grand Codex</p>
+                    <p>III. L'Éveil du Prédateur Pacifique</p>
+                    <p>IV. L'Art de l'Interrupteur Mental</p>
+                    <p>V. La Stratégie du Silence</p>
+                  </div>
                 </li>
-                <li className="flex items-center justify-between border-b border-[#1A1A1A] pb-3">
+                <li className="flex items-center justify-between border-b border-[#1A1A1A] pb-3 mt-3">
                   <span className="flex items-center gap-3"><Glyph size={12} className="text-gold"/> Lecture Web immersive</span>
                 </li>
                 <li className="flex items-center justify-between border-b border-[#1A1A1A] pb-3">
@@ -200,24 +206,36 @@ export default function LandingPage() {
                   <span className="flex items-center gap-3"><Glyph size={12} className="text-gold"/> Fréquences de concentration</span>
                 </li>
                 <li className="flex items-center justify-between border-b border-[#1A1A1A] pb-3">
-                  <span className="flex items-center gap-3"><Glyph size={12} className="text-gold"/> Toutes les mises à jour futures</span>
+                  <span className="flex items-center gap-3"><Glyph size={12} className="text-gold"/> Lifetime updates included</span>
                 </li>
                 <li className="flex items-center justify-between pb-1">
-                  <span className="flex items-center gap-3"><Glyph size={12} className="text-gold"/> Accès Founder Privilégié</span>
+                  <span className="flex items-center gap-3"><Glyph size={12} className="text-gold"/> Founder Access Privilégié</span>
                 </li>
               </ul>
             </div>
             
-            <div className="flex flex-col gap-4">
-              <button 
-                onClick={handleCheckout} 
-                disabled={isCheckingOut}
-                className="w-full bg-gold text-[#050505] font-bold py-6 px-10 uppercase tracking-widest text-sm md:text-base transition-all duration-300 hover:brightness-110 disabled:opacity-50"
-              >
-                {isCheckingOut ? "Ouverture..." : "NIDALUM Founder Library (99€)"}
-              </button>
-              <div className="text-center">
-                 <span className="text-[#a3a3a3] font-mono text-xs tracking-widest uppercase">Founder Access Included</span>
+            <div className="flex flex-col gap-6">
+              <div className="flex flex-col items-center border border-gold/20 p-6 bg-gold/5">
+                <span className="text-white font-serif text-3xl mb-1">99 €</span>
+                <span className="text-[#a3a3a3] font-mono text-xs tracking-widest uppercase line-through mb-4">Valeur totale : 145 €</span>
+                
+                <button 
+                  onClick={handleCheckout} 
+                  disabled={isCheckingOut}
+                  className="w-full bg-gold text-[#050505] font-bold py-5 px-8 uppercase tracking-widest text-sm transition-all duration-300 hover:brightness-110 disabled:opacity-50"
+                >
+                  {isCheckingOut ? "Ouverture..." : "Access the Founder Library"}
+                </button>
+              </div>
+
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center mt-2">
+                <div className="text-[#666] font-mono text-[9px] tracking-widest uppercase">Created in Germany</div>
+                <div className="text-[#666] font-mono text-[9px] tracking-widest uppercase">Independent publisher</div>
+                <div className="text-[#666] font-mono text-[9px] tracking-widest uppercase">Digital Edition</div>
+                <div className="text-[#666] font-mono text-[9px] tracking-widest uppercase flex items-center justify-center gap-1">
+                  <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                  Secure by Stripe
+                </div>
               </div>
             </div>
             
@@ -233,6 +251,50 @@ export default function LandingPage() {
              </TiltImage>
           </div>
         </div>
+      </section>
+
+      {/* PORTE 03 — LE CHECKOUT RAPIDE (FOOTER) */}
+      <section className="py-32 px-6 bg-[#0a0a0a]">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.98 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+          className="max-w-2xl mx-auto text-center bg-[#050505] p-8 md:p-16 border border-[#1A1A1A] shadow-2xl relative overflow-hidden"
+        >
+          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-gold to-transparent opacity-70"></div>
+          
+          <Glyph size={24} className="mx-auto mb-8 text-gold" />
+          
+          <h2 className="text-2xl md:text-[40px] font-serif text-white mb-2 relative z-10">Founder Library.</h2>
+          <p className="text-[#666] font-mono text-sm tracking-widest uppercase mb-8 relative z-10">
+            <span className="line-through mr-3">Valeur : 145 €</span>
+            <span className="text-gold">Aujourd'hui : 99 €</span>
+          </p>
+
+          <p className="text-[#a3a3a3] mb-12 leading-relaxed text-[16px] font-light relative z-10">
+            Paiement unique. Accès immédiat au téléchargement des 5 Livres Fondateurs (PDF/EPUB) et à la liseuse Web. <br/>
+            <span className="text-gold italic mt-2 inline-block">Lifetime updates included.</span>
+          </p>
+          
+          <button 
+            onClick={handleCheckout} 
+            disabled={isCheckingOut}
+            className="w-full bg-gold text-[#050505] font-bold py-5 px-10 uppercase tracking-widest text-sm transition-all duration-300 hover:brightness-110 disabled:opacity-50"
+          >
+            {isCheckingOut ? "Redirection vers Stripe..." : "Access the Founder Library"}
+          </button>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center mt-8 pt-6 border-t border-[#1A1A1A]">
+            <div className="text-[#666] font-mono text-[9px] tracking-widest uppercase">Created in Germany</div>
+            <div className="text-[#666] font-mono text-[9px] tracking-widest uppercase">Independent publisher</div>
+            <div className="text-[#666] font-mono text-[9px] tracking-widest uppercase">Digital Edition</div>
+            <div className="text-[#666] font-mono text-[9px] tracking-widest uppercase flex items-center justify-center gap-1">
+              <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              Secure by Stripe
+            </div>
+          </div>
+        </motion.div>
       </section>
 
       <Footer />

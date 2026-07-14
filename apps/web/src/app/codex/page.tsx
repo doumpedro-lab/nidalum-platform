@@ -17,6 +17,14 @@ export default function CodexDashboard() {
     { id: 'updates', label: 'Updates', desc: 'Nouvelles éditions' },
   ];
 
+  const books = [
+    "I. Le Livre d'Apprentissage",
+    "II. Le Grand Codex",
+    "III. L'Éveil du Prédateur Pacifique",
+    "IV. L'Art de l'Interrupteur Mental",
+    "V. La Stratégie du Silence"
+  ];
+
   const renderContent = () => {
     switch (activeTab) {
       case 'library':
@@ -25,13 +33,13 @@ export default function CodexDashboard() {
             <h2 className="text-3xl font-serif text-white">NIDALUM Founder Library</h2>
             <p className="text-[#a3a3a3] font-light">Vos 5 ouvrages fondateurs sont déverrouillés.</p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <div key={i} className="border border-[#1A1A1A] bg-[#0a0a0a] p-6 hover:border-gold/50 transition-all duration-300">
+              {books.map((bookTitle, index) => (
+                <div key={index} className="border border-[#1A1A1A] bg-[#0a0a0a] p-6 hover:border-gold/50 transition-all duration-300">
                   <div className="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center mb-6">
                     <Glyph size={16} className="text-gold" />
                   </div>
-                  <h3 className="text-white font-serif text-xl mb-2">Livre N°{i}</h3>
-                  <p className="text-[#666] text-sm font-mono uppercase tracking-widest">Disponible</p>
+                  <h3 className="text-white font-serif text-lg mb-2 leading-snug">{bookTitle}</h3>
+                  <p className="text-[#666] text-sm font-mono uppercase tracking-widest mt-4">Disponible</p>
                 </div>
               ))}
             </div>
@@ -46,7 +54,7 @@ export default function CodexDashboard() {
               Le lecteur Web nidalum se charge. Préparez-vous à entrer dans le silence absolu.
             </p>
             <button className="px-8 py-3 border border-gold text-gold uppercase tracking-[0.2em] text-xs hover:bg-gold hover:text-black transition-all">
-              Ouvrir le Grimoire
+              Ouvrir la Liseuse
             </button>
           </div>
         );
@@ -56,10 +64,10 @@ export default function CodexDashboard() {
             <h2 className="text-3xl font-serif text-white">Téléchargements</h2>
             <p className="text-[#a3a3a3] font-light">Récupérez les éditions numériques premium pour vos propres appareils.</p>
             <div className="space-y-4">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <div key={i} className="flex flex-col sm:flex-row sm:items-center justify-between border border-[#1A1A1A] bg-[#0a0a0a] p-6">
+              {books.map((bookTitle, index) => (
+                <div key={index} className="flex flex-col sm:flex-row sm:items-center justify-between border border-[#1A1A1A] bg-[#0a0a0a] p-6">
                   <div>
-                    <h3 className="text-white font-serif text-lg">Livre N°{i} - Édition Intégrale</h3>
+                    <h3 className="text-white font-serif text-lg">{bookTitle.replace(/^[IVX]+\.\s/, '')} - Édition Intégrale</h3>
                     <p className="text-[#666] text-xs font-mono mt-1">Version 1.0.0</p>
                   </div>
                   <div className="flex gap-4 mt-4 sm:mt-0">
@@ -110,7 +118,27 @@ export default function CodexDashboard() {
         </div>
         
         <div className="p-8">
-          <p className="text-[#666] font-mono text-xs tracking-[0.2em] uppercase mb-6">Founder Dashboard</p>
+          <p className="text-[#666] font-mono text-xs tracking-[0.2em] uppercase mb-4">Founder Dashboard</p>
+          
+          {/* Progression Counters */}
+          <div className="mb-8 p-4 border border-[#1A1A1A] bg-[#050505] space-y-3">
+            <div className="flex justify-between items-center text-xs font-mono">
+              <span className="text-[#a3a3a3]">Status</span>
+              <span className="text-gold">Founder #008</span>
+            </div>
+            <div className="flex justify-between items-center text-xs font-mono">
+              <span className="text-[#a3a3a3]">Member since</span>
+              <span className="text-white">2026</span>
+            </div>
+            <div className="flex justify-between items-center text-xs font-mono">
+              <span className="text-[#a3a3a3]">Library unlocked</span>
+              <span className="text-white">5 / 5 books</span>
+            </div>
+            <div className="w-full h-1 bg-[#1A1A1A] mt-2">
+              <div className="h-full bg-gold w-full"></div>
+            </div>
+          </div>
+
           <nav className="space-y-2">
             {tabs.map((tab) => (
               <button
