@@ -34,11 +34,11 @@ export default function CodexDashboard() {
 
           // Fetch dynamic catalog
           const libSnapshot = await getDocs(collection(db, 'library'));
-          const fetchedBooks = libSnapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+          const fetchedBooks = libSnapshot.docs.map(d => ({ id: d.id, ...d.data() })) as any[];
           setBooks(fetchedBooks.sort((a, b) => a.title.localeCompare(b.title)));
 
           const musicSnapshot = await getDocs(collection(db, 'music'));
-          const fetchedMusic = musicSnapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+          const fetchedMusic = musicSnapshot.docs.map(d => ({ id: d.id, ...d.data() })) as any[];
           setMusic(fetchedMusic);
 
         } catch (error) {
