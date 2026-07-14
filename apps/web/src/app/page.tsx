@@ -74,12 +74,10 @@ export default function LandingPage() {
   const handleCheckout = async () => {
     setIsCheckingOut(true);
     try {
-      const tempGuardianId = 'G-' + Math.floor(Math.random() * 90000 + 10000);
-      
       const response = await fetch('/api/checkout', { 
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ guardianId: tempGuardianId, email: null })
+        body: JSON.stringify({ email: null })
       });
       const data = await response.json();
       if (data.url) {

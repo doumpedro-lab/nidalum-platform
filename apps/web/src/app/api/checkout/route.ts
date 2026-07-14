@@ -7,18 +7,11 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_mock', {
 
 export async function POST(request: Request) {
   try {
-    const { guardianId, email } = await request.json();
-
-    if (!guardianId) {
-      return NextResponse.json({ error: 'Guardian ID manquant' }, { status: 400 });
-    }
+    const { email } = await request.json();
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
-      customer_email: email,
-      metadata: {
-        guardianId: guardianId
-      },
+      customer_email: email || undefined,
       line_items: [
         {
           price_data: {
