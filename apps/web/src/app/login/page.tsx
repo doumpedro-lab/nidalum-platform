@@ -7,6 +7,8 @@ import { Glyph } from '../../components/Glyph';
 import { sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink } from 'firebase/auth';
 import { auth } from '@nidalum/firebase/src/client';
 
+import Spline from '@splinetool/react-spline';
+
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -63,12 +65,18 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#050505] text-white flex items-center justify-center selection:bg-gold selection:text-black p-6">
+    <main className="relative min-h-screen bg-[#050505] text-white flex items-center justify-center selection:bg-gold selection:text-black p-6 overflow-hidden">
+      {/* 3D Spline Background */}
+      <div className="absolute inset-0 w-full h-full z-0 opacity-30 filter contrast-125 saturate-50">
+        <Spline scene="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode" />
+      </div>
+      <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/50 via-transparent to-[#050505] pointer-events-none z-0"></div>
+
       <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="w-full max-w-md bg-[#0a0a0a] border border-[#1A1A1A] p-10 shadow-2xl relative overflow-hidden"
+        initial={{ opacity: 0, y: 20, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="w-full max-w-md bg-black/40 backdrop-blur-xl border border-nidalum-gold/20 p-10 shadow-[0_0_50px_rgba(207,175,98,0.1)] relative z-10 rounded-2xl"
       >
         <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-gold to-transparent opacity-70"></div>
         

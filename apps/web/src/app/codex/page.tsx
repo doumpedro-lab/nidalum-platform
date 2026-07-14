@@ -8,6 +8,7 @@ import { auth, db, storage } from '@nidalum/firebase/src/client';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
 import { ref, getDownloadURL } from 'firebase/storage';
+import { GlareCard } from '../../components/ui/GlareCard';
 
 type Tab = 'library' | 'reader' | 'music' | 'downloads' | 'soundscapes' | 'updates' | 'licenses' | 'profile' | 'settings';
 
@@ -109,15 +110,41 @@ export default function CodexDashboard() {
           <div className="space-y-8 animate-fade-in">
             <h2 className="text-3xl font-serif text-white">NIDALUM Founder Library</h2>
             <p className="text-[#a3a3a3] font-light">Vos ouvrages fondateurs sont déverrouillés.</p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {books.map((book) => (
-                <div key={book.id} className="border border-[#1A1A1A] bg-[#0a0a0a] p-6 hover:border-gold/50 transition-all duration-300">
-                  <div className="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center mb-6">
-                    <Glyph size={16} className="text-gold" />
-                  </div>
-                  <h3 className="text-white font-serif text-lg mb-2 leading-snug">{book.title}</h3>
-                  <p className="text-[#666] text-sm font-mono uppercase tracking-widest mt-4">Disponible (v{book.version})</p>
-                </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+              {books.map((book: any, idx) => (
+                <motion.div
+                  key={book.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.1 }}
+                >
+                  <GlareCard className="h-full">
+                    <div className="bg-[#0a0a0a] p-6 rounded-xl border border-[#1A1A1A] flex flex-col h-full hover:border-gold/40 transition-colors">
+                      <div className="aspect-[2/3] bg-[#111] mb-6 rounded-lg flex items-center justify-center border border-[#333] overflow-hidden relative group">
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                          <button 
+                            onClick={() => handleDownload(book)}
+                            className="w-full py-2 bg-gold text-black text-sm uppercase tracking-widest font-bold rounded hover:bg-gold/90 transition-colors"
+                          >
+                            Télécharger
+                          </button>
+                        </div>
+                        <Glyph size={48} className="text-[#333] group-hover:scale-110 transition-transform duration-500" />
+                      </div>
+                      <h3 className="text-xl font-serif text-white mb-2">{book.title}</h3>
+                      <p className="text-sm text-[#666] mb-4 flex-grow">{book.description || "Édition numérique Premium."}</p>
+                      <div className="flex justify-between items-center text-xs text-[#666] border-t border-[#1A1A1A] pt-4">
+                        <span>{book.version || 'v1.0'}</span>
+                        <button 
+                          onClick={() => handleDownload(book)}
+                          className="text-gold hover:text-white transition-colors uppercase tracking-wider font-semibold"
+                        >
+                          Lire
+                        </button>
+                      </div>
+                    </div>
+                  </GlareCard>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -127,21 +154,40 @@ export default function CodexDashboard() {
           <div className="space-y-8 animate-fade-in">
             <h2 className="text-3xl font-serif text-white">NIDALUM Audio & Music</h2>
             <p className="text-[#a3a3a3] font-light">Albums premium, paysages sonores et fréquences.</p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {music.map((track) => (
-                <div key={track.id} className="flex items-center gap-6 border border-[#1A1A1A] bg-[#0a0a0a] p-6">
-                  <div className="w-16 h-16 bg-[#111] flex items-center justify-center rounded">
-                    <Glyph size={24} className="text-[#333]" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-white font-serif text-xl">{track.title}</h3>
-                    <p className="text-[#666] text-xs font-mono uppercase mt-1">{track.artist} - {track.type}</p>
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <button className="text-xs font-mono uppercase tracking-widest text-[#a3a3a3] hover:text-white border-b border-[#333] hover:border-white pb-1 transition-all">▶ Play</button>
-                    <button onClick={() => handleDownload(track.id)} className="text-xs font-mono uppercase tracking-widest text-[#a3a3a3] hover:text-white border-b border-[#333] hover:border-white pb-1 transition-all">⬇ FLAC</button>
-                  </div>
-                </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {music.map((track: any, idx) => (
+                <motion.div
+                  key={track.id}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: idx * 0.1 }}
+                >
+                  <GlareCard className="h-full">
+                    <div className="bg-[#0a0a0a] rounded-xl border border-[#1A1A1A] overflow-hidden group hover:border-gold/40 transition-colors flex flex-col h-full">
+                      <div className="h-48 bg-[#111] relative flex items-center justify-center border-b border-[#1A1A1A]">
+                        <div className="absolute inset-0 bg-black/40 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm">
+                          <button 
+                            onClick={() => handlePlayMusic(track)}
+                            className="w-16 h-16 rounded-full bg-gold flex items-center justify-center shadow-[0_0_20px_rgba(207,175,98,0.5)] hover:scale-110 transition-transform"
+                          >
+                            <svg className="w-6 h-6 text-black ml-1" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M8 5v14l11-7z" />
+                            </svg>
+                          </button>
+                        </div>
+                        <Glyph size={48} className="text-[#333] group-hover:rotate-180 transition-transform duration-1000" />
+                      </div>
+                      <div className="p-6 flex flex-col flex-grow">
+                        <h3 className="text-xl font-serif text-white mb-1">{track.title}</h3>
+                        <p className="text-sm text-[#666] mb-4">{track.artist}</p>
+                        <div className="mt-auto flex justify-between items-center text-xs text-[#666]">
+                          <span className="uppercase tracking-wider">{track.type}</span>
+                          <span>{Math.floor(track.duration / 60)}:{(track.duration % 60).toString().padStart(2, '0')}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </GlareCard>
+                </motion.div>
               ))}
             </div>
           </div>
