@@ -74,13 +74,12 @@ export default function LandingPage() {
   const handleCheckout = async () => {
     setIsCheckingOut(true);
     try {
-      // Generate a temporary ID that will become the user's ID
       const tempGuardianId = 'G-' + Math.floor(Math.random() * 90000 + 10000);
       
       const response = await fetch('/api/checkout', { 
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ guardianId: tempGuardianId, email: null }) // Stripe will ask for the email
+        body: JSON.stringify({ guardianId: tempGuardianId, email: null })
       });
       const data = await response.json();
       if (data.url) {
@@ -152,12 +151,12 @@ export default function LandingPage() {
             </motion.span>
           </h1>
           <p className="text-[#a3a3a3] text-lg sm:text-xl md:text-[22px] max-w-3xl mx-auto mb-12 font-light leading-relaxed">
-            Le Grand Codex NIDALUM est enfin scellé. Accédez à la Liseuse Immersive et déverrouillez le premier ouvrage fondateur : Le Livre d'Apprentissage.
+            Le Grand Codex NIDALUM est enfin scellé. Accédez à l'Édition Digitale Complète et téléchargez les 5 Livres Fondateurs en format PDF HD & EPUB.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16 pointer-events-auto">
             <button onClick={() => document.getElementById('codex')?.scrollIntoView({ behavior: 'smooth' })} className="w-full sm:w-auto bg-transparent border border-[#333333] text-white font-bold py-5 px-10 uppercase tracking-[0.15em] text-sm md:text-base transition-all duration-300 hover:border-gold hover:text-gold">
-              Voir le Grimoire
+              Découvrir l'Offre
             </button>
             <button onClick={handleCheckout} disabled={isCheckingOut} className="w-full sm:w-auto border border-gold/40 text-[#050505] font-bold py-5 px-10 uppercase tracking-[0.15em] text-sm md:text-base transition-all duration-300 hover:border-gold hover:shadow-[0_5px_30px_rgba(212,175,55,0.2)] bg-gold animate-[breathe_15s_ease-in-out_infinite]">
               {isCheckingOut ? "Ouverture..." : "Déverrouiller le Codex (99€)"}
@@ -171,34 +170,48 @@ export default function LandingPage() {
           transition={{ delay: 1, duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
           className="absolute bottom-[-15%] left-1/2 transform -translate-x-1/2 w-[90%] md:w-[40%] max-w-lg z-20 pointer-events-auto"
         >
-          <TiltImage src="/images/grimoire_front.png" alt="Le Livre d'Apprentissage Nidalum" sizes="(max-width: 768px) 90vw, 40vw" className="w-full aspect-[3/4]">
+          <TiltImage src="/images/grimoire_front.png" alt="La Bibliothèque Nidalum" sizes="(max-width: 768px) 90vw, 40vw" className="w-full aspect-[3/4]">
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 z-20 pointer-events-none">
               <h2 className="text-gold font-serif text-3xl md:text-5xl uppercase tracking-[0.2em] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] mt-[-10%] opacity-90">NIDALUM</h2>
               <div className="h-[1px] w-12 bg-gold opacity-50 my-4"></div>
-              <p className="text-white font-mono text-xs md:text-sm tracking-widest uppercase opacity-70">Le Livre d'Apprentissage</p>
+              <p className="text-white font-mono text-xs md:text-sm tracking-widest uppercase opacity-70">Édition Intégrale</p>
             </div>
           </TiltImage>
         </motion.div>
       </section>
 
-      {/* PORTE 01 — LE GRIMOIRE */}
+      {/* PORTE 01 — LE PACK COMPLET */}
       <section id="codex" className="py-32 md:py-40 px-6 bg-[#0a0a0a] relative z-20 border-t border-[#111111]">
         <div className="max-w-6xl mx-auto px-6 py-12 flex flex-col-reverse md:flex-row items-center gap-12 md:gap-24">
           <div className="w-full md:w-1/2">
             <div className="flex items-center gap-4 mb-6">
-              <span className="text-gold font-mono text-xs tracking-widest uppercase">L'Ouvrage N°1</span>
+              <span className="text-gold font-mono text-xs tracking-widest uppercase">L'Offre Intégrale</span>
             </div>
-            <h2 className="text-3xl md:text-[56px] font-serif text-white mb-8 leading-tight">Le Livre d'Apprentissage Nidalum.</h2>
+            <h2 className="text-3xl md:text-[48px] font-serif text-white mb-8 leading-tight">NIDALUM Founder Library.</h2>
             <p className="text-[18px] text-[#a3a3a3] font-light leading-relaxed mb-8">
-              Ce n'est pas un ebook PDF que vous allez oublier dans un dossier. C'est un Grimoire interactif conçu pour être lu dans une liseuse sombre, immersive, pensée pour la concentration absolue.
+              Vous n'achetez pas un simple document. Vous faites l'acquisition d'une véritable bibliothèque pour forger votre esprit, livrée dans des formats premiums.
             </p>
-            <ul className="space-y-4 mb-10 text-[#a3a3a3] font-light">
-              <li className="flex items-center gap-3"><Glyph size={12} className="text-gold"/> Les Fondations du système NIDALUM.</li>
-              <li className="flex items-center gap-3"><Glyph size={12} className="text-gold"/> L'Art de l'Interrupteur Mental.</li>
-              <li className="flex items-center gap-3"><Glyph size={12} className="text-gold"/> Déverrouillage automatique après paiement.</li>
-            </ul>
+            
+            <div className="bg-[#050505] border border-[#1A1A1A] p-8 mb-10">
+              <h3 className="text-gold font-mono text-xs tracking-widest uppercase mb-4">Ce que vous recevez immédiatement :</h3>
+              <ul className="space-y-4 text-white font-light text-[15px]">
+                <li className="flex items-center justify-between border-b border-[#1A1A1A] pb-3">
+                  <span className="flex items-center gap-3"><Glyph size={12} className="text-gold"/> Les 5 Livres Fondateurs (Pack Complet)</span>
+                  <span className="text-[#666] font-mono text-xs">PDF HD + EPUB</span>
+                </li>
+                <li className="flex items-center justify-between border-b border-[#1A1A1A] pb-3">
+                  <span className="flex items-center gap-3"><Glyph size={12} className="text-gold"/> La Liseuse Immersive</span>
+                  <span className="text-[#666] font-mono text-xs">Accès Web</span>
+                </li>
+                <li className="flex items-center justify-between border-b border-[#1A1A1A] pb-3">
+                  <span className="flex items-center gap-3"><Glyph size={12} className="text-gold"/> Mises à jour & Bonus Futurs</span>
+                  <span className="text-[#666] font-mono text-xs">À vie</span>
+                </li>
+              </ul>
+            </div>
+
             <button onClick={handleCheckout} disabled={isCheckingOut} className="border-b border-gold text-gold pb-1 uppercase tracking-widest text-sm hover:text-white hover:border-white transition-all">
-              Acheter l'accès à vie
+              Débloquer la Bibliothèque (99€)
             </button>
           </div>
           <div className="w-full md:w-1/2 perspective-[1200px]">
@@ -207,35 +220,30 @@ export default function LandingPage() {
                   <div className="w-24 h-24 border border-gold/30 rounded-full flex items-center justify-center mb-6">
                     <Glyph size={32} className="text-gold opacity-80" />
                   </div>
-                  <p className="text-gold font-mono text-[10px] tracking-[0.4em] uppercase opacity-60">Édition Fondatrice</p>
+                  <p className="text-gold font-mono text-[10px] tracking-[0.4em] uppercase opacity-60">Pack Fondateur</p>
                 </div>
              </TiltImage>
           </div>
         </div>
       </section>
 
-      {/* PORTE 02 — LA VISION */}
+      {/* PORTE 02 — LA VISION FUTURE */}
       <section className="py-24 bg-[#050505]">
         <div className="max-w-4xl mx-auto text-center mb-16">
-          <h2 className="text-3xl md:text-[48px] font-serif text-white mb-6">L'Écosystème NIDALUM</h2>
-          <p className="text-[18px] text-[#a3a3a3] font-light">Votre paiement de 99€ (Founder Access) ne débloque pas seulement le premier Livre, il vous donne la clé de tout ce que nous allons bâtir.</p>
+          <h2 className="text-3xl md:text-[48px] font-serif text-white mb-6">Un Écosystème en Expansion</h2>
+          <p className="text-[18px] text-[#a3a3a3] font-light">Le "Founder Access" garantit que vous ne paierez jamais pour les évolutions futures de la plateforme.</p>
         </div>
 
-        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="border border-[#1A1A1A] bg-[#0a0a0a] p-8 hover:border-gold/50 transition-all duration-500">
-            <h3 className="text-white font-serif text-2xl mb-4">Le Grand Codex</h3>
-            <p className="text-[#a3a3a3] text-sm leading-relaxed mb-6">La liseuse immersive sans distraction. Lisez dans le noir absolu.</p>
-            <span className="text-gold text-xs font-mono uppercase tracking-widest">Disponible ✔</span>
+        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="border border-[#1A1A1A] bg-[#0a0a0a] p-8 opacity-60 hover:opacity-100 transition-all duration-500">
+            <h3 className="text-white font-serif text-2xl mb-4">La Fréquence (Artistes & Musique)</h3>
+            <p className="text-[#a3a3a3] text-sm leading-relaxed mb-6">Des paysages sonores isochrones produits par des artistes exclusifs pour forcer votre cerveau à se concentrer.</p>
+            <span className="text-[#666] text-xs font-mono uppercase tracking-widest">En production</span>
           </div>
-          <div className="border border-[#1A1A1A] bg-[#0a0a0a] p-8 opacity-60">
-            <h3 className="text-white font-serif text-2xl mb-4">La Fréquence (Music)</h3>
-            <p className="text-[#a3a3a3] text-sm leading-relaxed mb-6">Des paysages sonores isochrones pour forcer votre cerveau à se concentrer.</p>
-            <span className="text-[#666] text-xs font-mono uppercase tracking-widest">Prochainement</span>
-          </div>
-          <div className="border border-[#1A1A1A] bg-[#0a0a0a] p-8 opacity-60">
-            <h3 className="text-white font-serif text-2xl mb-4">Les Apps</h3>
-            <p className="text-[#a3a3a3] text-sm leading-relaxed mb-6">Des outils utilitaires minimalistes connectés à votre compte Nidalum.</p>
-            <span className="text-[#666] text-xs font-mono uppercase tracking-widest">En développement</span>
+          <div className="border border-[#1A1A1A] bg-[#0a0a0a] p-8 opacity-60 hover:opacity-100 transition-all duration-500">
+            <h3 className="text-white font-serif text-2xl mb-4">Les Apps Nidalum</h3>
+            <p className="text-[#a3a3a3] text-sm leading-relaxed mb-6">Des outils utilitaires minimalistes connectés à votre compte Nidalum pour remplacer le bruit par l'action.</p>
+            <span className="text-[#666] text-xs font-mono uppercase tracking-widest">En conception</span>
           </div>
         </div>
       </section>
@@ -253,10 +261,12 @@ export default function LandingPage() {
           
           <Glyph size={24} className="mx-auto mb-8 text-gold" />
           
-          <h2 className="text-2xl md:text-[40px] font-serif text-white mb-6 relative z-10">Founder Access.</h2>
+          <h2 className="text-2xl md:text-[40px] font-serif text-white mb-2 relative z-10">Founder Access.</h2>
+          <p className="text-[#666] font-mono text-sm tracking-widest uppercase mb-8 relative z-10 line-through">Valeur : 145€</p>
+
           <p className="text-[#a3a3a3] mb-12 leading-relaxed text-[16px] font-light relative z-10">
-            Un paiement unique de <strong className="text-white">99€</strong>.<br/>
-            Accès immédiat à la liseuse et au Livre d'Apprentissage.
+            Un paiement unique de <strong className="text-white text-2xl">99€</strong>.<br/>
+            Accès immédiat au téléchargement des 5 Livres Fondateurs (PDF/EPUB) et à la liseuse Web.
           </p>
           
           <button 
