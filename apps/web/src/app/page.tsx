@@ -178,27 +178,21 @@ export default function LandingPage() {
             
             <div className="bg-[#050505] border border-[#1A1A1A] p-8 mb-10">
               <h3 className="text-gold font-mono text-xs tracking-widest uppercase mb-6">Ce que vous recevez :</h3>
-              <ul className="space-y-5 text-white font-light text-[15px]">
-                <li className="flex flex-col border-b border-[#1A1A1A] pb-3">
-                  <span className="flex items-center gap-3"><Glyph size={12} className="text-gold"/> Accès à la Founder Library</span>
+              <ul className="space-y-2 mb-8 font-mono text-sm text-[#888888]">
+                <li className="flex items-center justify-between border-b border-[#1A1A1A] pb-3">
+                  <span className="flex items-center gap-3"><Glyph size={12} className="text-nidalum-gold"/> Plateforme Web App (Founder Library)</span>
                 </li>
-                <li className="flex flex-col border-b border-[#1A1A1A] pb-3">
-                  <span className="flex items-center gap-3"><Glyph size={12} className="text-nidalum-gold"/> L'Écosystème NIDALUM (Ouvrages, Outils & Fréquences)</span>
+                <li className="flex flex-col border-b border-[#1A1A1A] pb-3 mt-3">
+                  <span className="flex items-center gap-3"><Glyph size={12} className="text-nidalum-gold"/> Le Grand Codex (Lecture Web, PDF HD, EPUB)</span>
                 </li>
                 <li className="flex items-center justify-between border-b border-[#1A1A1A] pb-3 mt-3">
-                  <span className="flex items-center gap-3"><Glyph size={12} className="text-gold"/> Lecture Web immersive</span>
+                  <span className="flex items-center gap-3"><Glyph size={12} className="text-nidalum-gold"/> Fréquences Musicales Neuro-Acoustiques</span>
                 </li>
-                <li className="flex items-center justify-between border-b border-[#1A1A1A] pb-3">
-                  <span className="flex items-center gap-3"><Glyph size={12} className="text-gold"/> Fichiers PDF HD & EPUB</span>
+                <li className="flex items-center justify-between border-b border-[#1A1A1A] pb-3 mt-3">
+                  <span className="flex items-center gap-3"><Glyph size={12} className="text-nidalum-gold"/> Protocoles & Outils Stratégiques</span>
                 </li>
-                <li className="flex items-center justify-between border-b border-[#1A1A1A] pb-3">
-                  <span className="flex items-center gap-3"><Glyph size={12} className="text-gold"/> Fréquences de concentration</span>
-                </li>
-                <li className="flex items-center justify-between border-b border-[#1A1A1A] pb-3">
-                  <span className="flex items-center gap-3"><Glyph size={12} className="text-gold"/> Lifetime updates included</span>
-                </li>
-                <li className="flex items-center justify-between pb-1">
-                  <span className="flex items-center gap-3"><Glyph size={12} className="text-gold"/> Founder Access Privilégié</span>
+                <li className="flex items-center justify-between mt-3">
+                  <span className="flex items-center gap-3"><Glyph size={12} className="text-nidalum-gold"/> Accès à vie & Mises à jour incluses</span>
                 </li>
               </ul>
             </div>

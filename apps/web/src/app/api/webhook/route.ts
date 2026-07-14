@@ -8,7 +8,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_mock', {
 });
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy_key_for_build');
 
 function generateLicenseId() {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
