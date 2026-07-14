@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Glyph } from '../../components/Glyph';
 import { sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink } from 'firebase/auth';
-import { auth } from '@nidalum/firebase';
+import { auth } from '@nidalum/firebase/src/client';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
