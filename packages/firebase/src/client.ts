@@ -1,5 +1,6 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getFirestore, collection, addDoc, query, where, getDocs } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 import { getAuth } from "firebase/auth";
 import { firebaseConfig } from "./config";
@@ -7,16 +8,18 @@ import { firebaseConfig } from "./config";
 let app;
 let db: any;
 let auth: any;
+let storage: any;
 
 try {
   app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
   db = getFirestore(app);
   auth = getAuth(app);
+  storage = getStorage(app);
 } catch (error) {
   console.warn("Firebase initialization skipped during build:", error);
 }
 
-export { db, auth };
+export { db, auth, storage };
 
 /**
  * Interface abstraite du client Firestore.

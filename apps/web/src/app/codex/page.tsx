@@ -4,9 +4,10 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Glyph } from '../../components/Glyph';
 import { useRouter } from 'next/navigation';
-import { auth, db } from '@nidalum/firebase/src/client';
+import { auth, db, storage } from '@nidalum/firebase/src/client';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
+import { ref, getDownloadURL } from 'firebase/storage';
 
 type Tab = 'library' | 'reader' | 'music' | 'downloads' | 'soundscapes' | 'updates' | 'licenses' | 'profile' | 'settings';
 
@@ -69,9 +70,36 @@ export default function CodexDashboard() {
     router.push('/');
   };
 
-  const handleDownload = async (assetId: string) => {
-    // In Sprint 4.2, this will call /api/download?assetId=...
-    alert(`Le téléchargement sécurisé pour ${assetId} sera implémenté via API Download (Signed URLs).`);
+  const handleDownload = async (book: any) => {
+    if (!book.storagePath) {
+      alert("Ce livre n'est pas encore disponible en téléchargement.");
+      return;
+    }
+    try {
+      const fileRef = ref(storage, book.storagePath);
+      const url = await getDownloadURL(fileRef);
+      window.open(url, '_blank');
+    } catch (error) {
+      console.error("Erreur lors de l'accès au fichier :", error);
+      alert("Erreur: Impossible d'accéder au fichier. Vérifiez vos droits ou contactez le support.");
+    }
+  };
+
+  const handlePlayMusic = async (track: any) => {
+    if (!track.storagePath) {
+      alert("Cette piste n'est pas encore disponible.");
+      return;
+    }
+    try {
+      const fileRef = ref(storage, track.storagePath);
+      const url = await getDownloadURL(fileRef);
+      // For now, open in a new tab which plays the audio.
+      // Later we can build an in-app audio player.
+      window.open(url, '_blank');
+    } catch (error) {
+      console.error("Erreur lors de l'accès à l'audio :", error);
+      alert("Erreur: Impossible d'accéder au fichier audio.");
+    }
   };
 
   const renderContent = () => {
