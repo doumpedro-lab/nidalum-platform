@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { SparklesCore } from '@/components/ui/sparkles';
+import { Spotlight } from '@/components/ui/spotlight';
 import Image from 'next/image';
 import Spline from '@splinetool/react-spline';
 import Footer from '../components/Footer';
@@ -119,9 +121,31 @@ export default function LandingPage() {
 
       {/* PORTE 00 — SILENCE (HERO) */}
       <section className="relative min-h-[100vh] flex flex-col justify-start items-center text-center px-4 pt-32 pb-32 overflow-hidden">
+        
+        {/* Aceternity Spotlight Effect */}
+        <Spotlight
+          className="-top-40 left-0 md:left-60 md:-top-20"
+          fill="white"
+        />
+
+        {/* Backgrounds (Spline + Aceternity Sparkles) */}
         <div className="absolute inset-0 w-full h-full z-0 pointer-events-auto opacity-70 mix-blend-screen">
           <Spline scene="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode" />
         </div>
+        
+        <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
+          <SparklesCore
+            id="tsparticlesfullpage"
+            background="transparent"
+            minSize={0.6}
+            maxSize={1.4}
+            particleDensity={100}
+            className="w-full h-full"
+            particleColor="#FFFFFF"
+            speed={0.5}
+          />
+        </div>
+
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#050505]/60 to-[#050505] pointer-events-none z-0"></div>
 
         <motion.div 
