@@ -4,11 +4,10 @@ import React, { useEffect, useState, useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import Spline from '@splinetool/react-spline';
-import { useWaitlist } from '../hooks/useWaitlist';
 import Footer from '../components/Footer';
 import { Glyph } from '../components/Glyph';
 
-const TiltImage = ({ src, alt, className, sizes = "100vw" }: { src: string, alt: string, className: string, sizes?: string }) => {
+const TiltImage = ({ src, alt, className, sizes = "100vw", children }: { src: string, alt: string, className: string, sizes?: string, children?: React.ReactNode }) => {
   const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -53,6 +52,7 @@ const TiltImage = ({ src, alt, className, sizes = "100vw" }: { src: string, alt:
       className={`relative rounded-xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.8)] border border-[#222222] ${className}`}
     >
       <Image src={src} alt={alt} fill sizes={sizes} className="object-cover" priority />
+      {children}
       <motion.div 
         className="absolute inset-0 z-10 pointer-events-none mix-blend-overlay"
         style={{
@@ -65,11 +65,35 @@ const TiltImage = ({ src, alt, className, sizes = "100vw" }: { src: string, alt:
 
 export default function LandingPage() {
   const [mounted, setMounted] = useState(false);
-  const { email, setEmail, status, errorMessage, guardianId, submit } = useWaitlist("hero");
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  const handleCheckout = async () => {
+    setIsCheckingOut(true);
+    try {
+      // Generate a temporary ID that will become the user's ID
+      const tempGuardianId = 'G-' + Math.floor(Math.random() * 90000 + 10000);
+      
+      const response = await fetch('/api/checkout', { 
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ guardianId: tempGuardianId, email: null }) // Stripe will ask for the email
+      });
+      const data = await response.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        console.error("No URL returned", data);
+        setIsCheckingOut(false);
+      }
+    } catch (err) {
+      console.error("Checkout error:", err);
+      setIsCheckingOut(false);
+    }
+  };
 
   if (!mounted) return <div className="bg-[#050505] min-h-screen" />;
 
@@ -93,8 +117,8 @@ export default function LandingPage() {
           </nav>
 
           <div className="hidden md:block">
-            <button aria-label="Accès fondateur" className="text-[10px] font-mono tracking-[0.2em] uppercase border border-[#333333] px-6 py-3 hover:border-gold hover:text-gold transition-all duration-300">
-              Founder Access
+            <button onClick={handleCheckout} disabled={isCheckingOut} aria-label="Accès fondateur" className="text-[10px] font-mono tracking-[0.2em] uppercase border border-[#333333] px-6 py-3 hover:border-gold hover:text-gold transition-all duration-300">
+              {isCheckingOut ? "Connexion..." : "Founder Access"}
             </button>
           </div>
         </div>
@@ -128,15 +152,15 @@ export default function LandingPage() {
             </motion.span>
           </h1>
           <p className="text-[#a3a3a3] text-lg sm:text-xl md:text-[22px] max-w-3xl mx-auto mb-12 font-light leading-relaxed">
-            Le Grand Codex NIDALUM rassemble des Séquences courtes conçues pour vous aider à retrouver rapidement un état de concentration et d'action.
+            Le Grand Codex NIDALUM est enfin scellé. Accédez à la Liseuse Immersive et déverrouillez le premier ouvrage fondateur : Le Livre d'Apprentissage.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16 pointer-events-auto">
-            <button className="w-full sm:w-auto bg-gold text-[#050505] font-bold py-5 px-10 uppercase tracking-[0.15em] text-sm md:text-base transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_5px_20px_rgba(212,175,55,0.4)]">
-              Découvrir le Codex
+            <button onClick={() => document.getElementById('codex')?.scrollIntoView({ behavior: 'smooth' })} className="w-full sm:w-auto bg-transparent border border-[#333333] text-white font-bold py-5 px-10 uppercase tracking-[0.15em] text-sm md:text-base transition-all duration-300 hover:border-gold hover:text-gold">
+              Voir le Grimoire
             </button>
-            <button className="w-full sm:w-auto border border-gold/20 text-white font-bold py-5 px-10 uppercase tracking-[0.15em] text-sm md:text-base transition-all duration-300 hover:border-gold hover:shadow-[0_5px_30px_rgba(212,175,55,0.15)] bg-[#050505] animate-[breathe_15s_ease-in-out_infinite]">
-              Request Founder Access
+            <button onClick={handleCheckout} disabled={isCheckingOut} className="w-full sm:w-auto border border-gold/40 text-[#050505] font-bold py-5 px-10 uppercase tracking-[0.15em] text-sm md:text-base transition-all duration-300 hover:border-gold hover:shadow-[0_5px_30px_rgba(212,175,55,0.2)] bg-gold animate-[breathe_15s_ease-in-out_infinite]">
+              {isCheckingOut ? "Ouverture..." : "Déverrouiller le Codex (99€)"}
             </button>
           </div>
         </motion.div>
@@ -145,148 +169,104 @@ export default function LandingPage() {
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute bottom-[-5%] left-1/2 transform -translate-x-1/2 w-[90%] md:w-[60%] max-w-3xl z-20 pointer-events-auto"
+          className="absolute bottom-[-15%] left-1/2 transform -translate-x-1/2 w-[90%] md:w-[40%] max-w-lg z-20 pointer-events-auto"
         >
-          <TiltImage src="/images/codex-real.jpg" alt="Le Grand Codex" sizes="(max-width: 768px) 90vw, 60vw" className="w-full aspect-video rounded-t-2xl border-b-0" />
+          <TiltImage src="/images/grimoire_front.png" alt="Le Livre d'Apprentissage Nidalum" sizes="(max-width: 768px) 90vw, 40vw" className="w-full aspect-[3/4]">
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 z-20 pointer-events-none">
+              <h2 className="text-gold font-serif text-3xl md:text-5xl uppercase tracking-[0.2em] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] mt-[-10%] opacity-90">NIDALUM</h2>
+              <div className="h-[1px] w-12 bg-gold opacity-50 my-4"></div>
+              <p className="text-white font-mono text-xs md:text-sm tracking-widest uppercase opacity-70">Le Livre d'Apprentissage</p>
+            </div>
+          </TiltImage>
         </motion.div>
       </section>
 
-      {/* PORTE 01 — LE BRUIT */}
+      {/* PORTE 01 — LE GRIMOIRE */}
       <section id="codex" className="py-32 md:py-40 px-6 bg-[#0a0a0a] relative z-20 border-t border-[#111111]">
-        <div className="max-w-3xl mx-auto text-center mb-24 md:mb-32">
-          <div className="flex items-center justify-center gap-4 mb-8">
-             <div className="h-[1px] w-8 bg-gold"></div>
-             <span className="font-mono text-gold text-xs uppercase tracking-[0.3em]">Porte 01 — Le Bruit</span>
-             <div className="h-[1px] w-8 bg-gold"></div>
+        <div className="max-w-6xl mx-auto px-6 py-12 flex flex-col-reverse md:flex-row items-center gap-12 md:gap-24">
+          <div className="w-full md:w-1/2">
+            <div className="flex items-center gap-4 mb-6">
+              <span className="text-gold font-mono text-xs tracking-widest uppercase">L'Ouvrage N°1</span>
+            </div>
+            <h2 className="text-3xl md:text-[56px] font-serif text-white mb-8 leading-tight">Le Livre d'Apprentissage Nidalum.</h2>
+            <p className="text-[18px] text-[#a3a3a3] font-light leading-relaxed mb-8">
+              Ce n'est pas un ebook PDF que vous allez oublier dans un dossier. C'est un Grimoire interactif conçu pour être lu dans une liseuse sombre, immersive, pensée pour la concentration absolue.
+            </p>
+            <ul className="space-y-4 mb-10 text-[#a3a3a3] font-light">
+              <li className="flex items-center gap-3"><Glyph size={12} className="text-gold"/> Les Fondations du système NIDALUM.</li>
+              <li className="flex items-center gap-3"><Glyph size={12} className="text-gold"/> L'Art de l'Interrupteur Mental.</li>
+              <li className="flex items-center gap-3"><Glyph size={12} className="text-gold"/> Déverrouillage automatique après paiement.</li>
+            </ul>
+            <button onClick={handleCheckout} disabled={isCheckingOut} className="border-b border-gold text-gold pb-1 uppercase tracking-widest text-sm hover:text-white hover:border-white transition-all">
+              Acheter l'accès à vie
+            </button>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-[72px] font-serif text-white mb-12">La théorie ne vous sauvera pas.</h2>
-          
-          <div className="text-lg sm:text-xl md:text-[22px] text-[#a3a3a3] font-light leading-loose space-y-6">
-            <p>Vous connaissez les méthodes.</p>
-            <p>Vous avez lu les livres.</p>
-            <p>Vous savez quoi faire.</p>
-            <p className="text-white font-serif italic text-2xl md:text-3xl my-10">Pourtant...</p>
-            <p>Vous n'agissez pas.</p>
-            <p>Le problème n'est pas votre volonté.</p>
-            <p className="text-gold drop-shadow-[0_0_10px_rgba(212,175,55,0.2)]">Le problème est votre environnement.</p>
+          <div className="w-full md:w-1/2 perspective-[1200px]">
+             <TiltImage src="/images/grimoire_back.png" alt="Le Sceau Nidalum" sizes="(max-width: 768px) 100vw, 50vw" className="w-full aspect-[3/4]">
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 z-20 pointer-events-none">
+                  <div className="w-24 h-24 border border-gold/30 rounded-full flex items-center justify-center mb-6">
+                    <Glyph size={32} className="text-gold opacity-80" />
+                  </div>
+                  <p className="text-gold font-mono text-[10px] tracking-[0.4em] uppercase opacity-60">Édition Fondatrice</p>
+                </div>
+             </TiltImage>
           </div>
-        </div>
-
-        <div className="max-w-4xl mx-auto space-y-24 md:space-y-32">
-          {[
-            { role: "LE FONDATEUR", quote: "Je passe mes journées à éteindre des incendies au lieu de bâtir.", trans: "2 minutes de Séquence pour isoler la tâche critique." },
-            { role: "LE CADRE", quote: "Mon agenda est plein, mais je n'avance sur rien.", trans: "Un rituel de transition entre chaque réunion." },
-            { role: "LE CRÉATIF", quote: "J'attends l'inspiration, mais je trouve l'algorithme.", trans: "Une fréquence sonore qui conditionne le cerveau." }
-          ].map((avatar, idx) => (
-            <motion.div 
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8 }}
-              className="flex flex-col items-center text-center"
-            >
-              <h3 className="text-white font-serif text-[22px] mb-4 tracking-[0.2em] uppercase">{avatar.role}</h3>
-              <p className="text-gold text-lg md:text-[22px] italic mb-6">"{avatar.quote}"</p>
-              <Glyph size={16} className="text-[#333333] mb-6" />
-              <div className="max-w-xl text-[#a3a3a3] font-light leading-relaxed text-[18px]">
-                <span>{avatar.trans}</span>
-              </div>
-            </motion.div>
-          ))}
         </div>
       </section>
 
-      {/* PORTE 02 — LA PRISE DE CONSCIENCE */}
+      {/* PORTE 02 — LA VISION */}
       <section className="py-24 bg-[#050505]">
-        <div className="max-w-5xl mx-auto px-6 py-12 md:py-24 flex flex-col md:flex-row items-center gap-12 md:gap-24">
-          <div className="w-full md:w-1/2 perspective-[1200px]">
-             <TiltImage src="/images/codex-real.jpg" alt="Le Grand Codex" sizes="(max-width: 768px) 100vw, 50vw" className="w-full aspect-[4/3]" />
-          </div>
-          <div className="w-full md:w-1/2">
-            <div className="flex items-center gap-4 mb-6">
-              <span className="text-gold font-mono text-xs tracking-widest uppercase">Porte 02 — L'Interrupteur</span>
-            </div>
-            <h2 className="text-3xl md:text-[48px] font-serif text-white mb-6">L'objet physique lourd.</h2>
-            <p className="text-[18px] text-[#a3a3a3] font-light leading-relaxed mb-8">
-              NIDALUM ne vous explique pas "pourquoi" vous devez agir. Il vous force à le faire. Ce n'est pas une application. C'est un ancrage tangent dans le monde réel.
-            </p>
-          </div>
+        <div className="max-w-4xl mx-auto text-center mb-16">
+          <h2 className="text-3xl md:text-[48px] font-serif text-white mb-6">L'Écosystème NIDALUM</h2>
+          <p className="text-[18px] text-[#a3a3a3] font-light">Votre paiement de 99€ (Founder Access) ne débloque pas seulement le premier Livre, il vous donne la clé de tout ce que nous allons bâtir.</p>
         </div>
 
-        <div className="max-w-5xl mx-auto px-6 py-12 md:py-24 flex flex-col-reverse md:flex-row items-center gap-12 md:gap-24">
-          <div className="w-full md:w-1/2">
-            <div className="flex items-center gap-4 mb-6">
-              <span className="text-gold font-mono text-xs tracking-widest uppercase">Porte 03 — La Fréquence</span>
-            </div>
-            <h2 className="text-3xl md:text-[48px] font-serif text-white mb-6">Scannez. Exécutez.</h2>
-            <p className="text-[18px] text-[#a3a3a3] font-light leading-relaxed mb-8">
-              Chaque Séquence contient un QR Code géométrique exclusif. En le scannant, votre téléphone cesse d'être une machine à distraction pour devenir le diffuseur d'un paysage sonore de concentration.
-            </p>
+        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="border border-[#1A1A1A] bg-[#0a0a0a] p-8 hover:border-gold/50 transition-all duration-500">
+            <h3 className="text-white font-serif text-2xl mb-4">Le Grand Codex</h3>
+            <p className="text-[#a3a3a3] text-sm leading-relaxed mb-6">La liseuse immersive sans distraction. Lisez dans le noir absolu.</p>
+            <span className="text-gold text-xs font-mono uppercase tracking-widest">Disponible ✔</span>
           </div>
-          <div className="w-full md:w-1/2 perspective-[1200px]">
-             <TiltImage src="/images/cards-real.jpg" alt="QR Codes NIDALUM" sizes="(max-width: 768px) 100vw, 50vw" className="w-full aspect-[4/3]" />
+          <div className="border border-[#1A1A1A] bg-[#0a0a0a] p-8 opacity-60">
+            <h3 className="text-white font-serif text-2xl mb-4">La Fréquence (Music)</h3>
+            <p className="text-[#a3a3a3] text-sm leading-relaxed mb-6">Des paysages sonores isochrones pour forcer votre cerveau à se concentrer.</p>
+            <span className="text-[#666] text-xs font-mono uppercase tracking-widest">Prochainement</span>
+          </div>
+          <div className="border border-[#1A1A1A] bg-[#0a0a0a] p-8 opacity-60">
+            <h3 className="text-white font-serif text-2xl mb-4">Les Apps</h3>
+            <p className="text-[#a3a3a3] text-sm leading-relaxed mb-6">Des outils utilitaires minimalistes connectés à votre compte Nidalum.</p>
+            <span className="text-[#666] text-xs font-mono uppercase tracking-widest">En développement</span>
           </div>
         </div>
       </section>
 
-      {/* PORTE 04 — LE GARDIEN */}
-      <section className="py-24 md:py-32 px-6 bg-[#0a0a0a]">
+      {/* PORTE 03 — LE CHECKOUT */}
+      <section className="py-32 px-6 bg-[#0a0a0a]">
         <motion.div 
           initial={{ opacity: 0, scale: 0.98 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1 }}
-          className="max-w-3xl mx-auto text-center bg-[#050505] p-8 md:p-24 border border-[#1A1A1A] shadow-2xl relative overflow-hidden"
+          className="max-w-2xl mx-auto text-center bg-[#050505] p-8 md:p-16 border border-[#1A1A1A] shadow-2xl relative overflow-hidden"
         >
           <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-gold to-transparent opacity-70"></div>
           
           <Glyph size={24} className="mx-auto mb-8 text-gold" />
           
-          <h2 className="text-2xl md:text-[48px] font-serif text-white mb-6 relative z-10">La Transmission 001.</h2>
-          <p className="text-[#a3a3a3] mb-12 leading-relaxed text-[18px] font-light relative z-10">
-            L'Édition Fondatrice est tirée à <strong className="text-white font-normal">100 exemplaires</strong>. Rejoignez le cercle des Fondateurs pour sécuriser votre Guardian ID.
+          <h2 className="text-2xl md:text-[40px] font-serif text-white mb-6 relative z-10">Founder Access.</h2>
+          <p className="text-[#a3a3a3] mb-12 leading-relaxed text-[16px] font-light relative z-10">
+            Un paiement unique de <strong className="text-white">99€</strong>.<br/>
+            Accès immédiat à la liseuse et au Livre d'Apprentissage.
           </p>
-          {status === 'success' ? (
-            <motion.div 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mt-8 p-8 border border-gold/30 bg-[#050505]/80 backdrop-blur-md rounded relative overflow-hidden text-center z-10"
-            >
-              <div className="absolute inset-0 bg-gold/5 blur-3xl rounded-full pointer-events-none" />
-              <h3 className="font-serif italic text-2xl text-gold mb-6">Bienvenue.</h3>
-              <p className="text-white font-light text-[18px] mb-8">
-                Votre accès Fondateur est confirmé.
-              </p>
-              <div className="border-t border-[#222222] pt-6 flex flex-col gap-2 items-center">
-                <span className="text-[10px] uppercase tracking-[0.3em] text-[#a3a3a3] font-mono">
-                  Guardian ID
-                </span>
-                <span className="text-xl font-mono text-white tracking-widest">
-                  {guardianId || 'G-00000'}
-                </span>
-              </div>
-            </motion.div>
-          ) : (
-            <form onSubmit={submit} className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
-              <input 
-                type="email" 
-                placeholder="Votre adresse email" 
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                disabled={status === "loading"}
-                className={`w-full sm:w-96 bg-transparent border ${status === "error" ? "border-red-500" : "border-[#333333] focus:border-gold"} text-white px-6 py-5 focus:outline-none transition-all duration-300 text-sm`}
-                required 
-              />
-              <button 
-                type="submit" 
-                disabled={status === "loading"}
-                className="bg-gold text-[#050505] font-bold py-5 px-10 uppercase tracking-widest text-sm whitespace-nowrap transition-all duration-300 hover:brightness-110"
-              >
-                {status === "loading" ? "Signalement..." : "Enter NIDALUM"}
-              </button>
-            </form>
-          )}
+          
+          <button 
+            onClick={handleCheckout} 
+            disabled={isCheckingOut}
+            className="w-full bg-gold text-[#050505] font-bold py-5 px-10 uppercase tracking-widest text-sm transition-all duration-300 hover:brightness-110 disabled:opacity-50"
+          >
+            {isCheckingOut ? "Redirection vers Stripe..." : "Payer 99€ par carte"}
+          </button>
+          <p className="text-xs text-[#666] mt-6 font-mono">Paiement sécurisé par Stripe.</p>
         </motion.div>
       </section>
 
