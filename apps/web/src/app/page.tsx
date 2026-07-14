@@ -130,47 +130,43 @@ export default function LandingPage() {
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           className="z-10 w-full max-w-5xl pointer-events-none relative mt-16"
         >
-          <Glyph size={18} className="mx-auto mb-8 text-gold opacity-50" />
-          
-          <h1 className="text-4xl sm:text-5xl md:text-[72px] font-serif leading-[1.1] mb-8 text-transparent bg-clip-text bg-gradient-to-b from-white to-[#a3a3a3]">
-            REPRENEZ LE CONTRÔLE<br />DE VOTRE ATTENTION.
+          <h1 className="text-5xl md:text-[90px] lg:text-[110px] font-serif leading-[1.05] tracking-tight mb-12 text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-[#888888]">
+            REPRENEZ LE CONTRÔLE.
           </h1>
-          <p className="text-gold text-xl sm:text-2xl md:text-[32px] max-w-3xl mx-auto mb-4 font-serif italic drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]">
-            Founder Library
-          </p>
-          <p className="text-[#a3a3a3] text-sm md:text-base tracking-[0.3em] uppercase font-mono max-w-3xl mx-auto mb-16">
-            Édition Fondatrice Limitée
-          </p>
           
-          <div className="flex justify-center items-center pointer-events-auto">
-            <button onClick={() => document.getElementById('offer')?.scrollIntoView({ behavior: 'smooth' })} className="px-8 py-4 border border-nidalum-gold/40 text-nidalum-gold hover:bg-nidalum-gold hover:text-black uppercase tracking-widest text-sm transition-all duration-300 bg-transparent backdrop-blur-sm shadow-[0_0_20px_rgba(255,248,231,0.1)]">
-              Access the Founder Library
+          <div className="flex justify-center items-center pointer-events-auto mt-8">
+            <button onClick={() => document.getElementById('offer')?.scrollIntoView({ behavior: 'smooth' })} className="px-10 py-5 rounded-full border border-white/10 bg-white/5 text-white hover:bg-white hover:text-black uppercase tracking-[0.2em] text-xs font-semibold transition-all duration-500 backdrop-blur-md shadow-[0_0_30px_rgba(255,255,255,0.05)]">
+              Entrer dans l'Écosystème
             </button>
           </div>
         </motion.div>
-
-        <motion.div 
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1, duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-          className="relative mt-16 w-[90%] md:w-[40%] max-w-sm z-20 pointer-events-auto"
-        >
-          <TiltImage src="" alt="EBOOK NIDALUM" sizes="(max-width: 768px) 90vw, 40vw" className="w-full aspect-[3/4] group cursor-pointer hover:shadow-[0_20px_80px_rgba(255,248,231,0.15)] transition-shadow duration-500">
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 z-20 pointer-events-none">
-              <h2 className="text-nidalum-gold font-serif text-3xl md:text-5xl uppercase tracking-[0.2em] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] opacity-100 group-hover:scale-105 transition-transform duration-500">NIDALUM</h2>
-              <div className="h-[1px] w-16 bg-nidalum-gold opacity-60 my-6"></div>
-              <p className="text-white font-mono text-xs md:text-sm tracking-[0.4em] uppercase opacity-90">ÉCOSYSTÈME</p>
-            </div>
-            
-            {/* Animated border pulse on hover */}
-            <div className="absolute inset-0 border border-nidalum-gold/0 group-hover:border-nidalum-gold/40 transition-colors duration-500 rounded-xl mix-blend-overlay"></div>
-          </TiltImage>
-        </motion.div>
       </section>
 
+      {/* Product Block moved to section below */}
+
       {/* PORTE 01 — LE PACK COMPLET */}
-      <section id="offer" className="py-32 md:py-40 px-6 bg-[#0a0a0a] relative z-20 border-t border-[#111111]">
-        <div className="max-w-6xl mx-auto px-6 py-12 flex flex-col-reverse md:flex-row items-center gap-12 md:gap-24">
+      <section id="offer" className="py-24 md:py-40 px-6 bg-[#0a0a0a] relative z-20 border-t border-[#111111]">
+        
+        {/* NIDALUM ÉCOSYSTÈME FLOATING CARD */}
+        <div className="flex justify-center mb-32">
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+            className="w-[90%] md:w-[40%] max-w-sm z-20 pointer-events-auto"
+          >
+            <TiltImage src="" alt="EBOOK NIDALUM" sizes="(max-width: 768px) 90vw, 40vw" className="w-full aspect-[3/4] group cursor-pointer hover:shadow-[0_20px_80px_rgba(255,248,231,0.15)] transition-shadow duration-500 border border-nidalum-gold/20 bg-[#050505]">
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 z-20 pointer-events-none">
+                <h2 className="text-nidalum-gold font-serif text-3xl md:text-5xl uppercase tracking-[0.2em] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] opacity-100 group-hover:scale-105 transition-transform duration-500">NIDALUM</h2>
+                <div className="h-[1px] w-16 bg-nidalum-gold opacity-60 my-6"></div>
+                <p className="text-white font-mono text-xs md:text-sm tracking-[0.4em] uppercase opacity-90">ÉCOSYSTÈME</p>
+              </div>
+            </TiltImage>
+          </motion.div>
+        </div>
+
+        <div className="max-w-6xl mx-auto flex flex-col-reverse md:flex-row items-center gap-12 md:gap-24">
           <div className="w-full md:w-1/2">
             <div className="flex items-center gap-4 mb-6">
               <span className="text-gold font-mono text-xs tracking-widest uppercase">L'Offre Intégrale</span>
