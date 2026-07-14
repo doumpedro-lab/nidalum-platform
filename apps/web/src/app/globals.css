@@ -40,6 +40,11 @@
     font-family: var(--font-serif);
     font-weight: 700;
   }
+
+  /* Hide Spline Logo Watermark */
+  a[href*="spline.design"] {
+    display: none !important;
+  }
 }
 
 @layer utilities {
