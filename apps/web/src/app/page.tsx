@@ -184,7 +184,7 @@ export default function LandingPage() {
                   <span className="flex items-center gap-3"><Glyph size={12} className="text-gold"/> Accès à la Founder Library</span>
                 </li>
                 <li className="flex flex-col border-b border-[#1A1A1A] pb-3">
-                  <span className="flex items-center gap-3"><Glyph size={12} className="text-nidalum-gold"/> Ebook NIDALUM Intégral</span>
+                  <span className="flex items-center gap-3"><Glyph size={12} className="text-nidalum-gold"/> L'Univers NIDALUM (Plusieurs Livres, Ebooks & PDFs inclus)</span>
                 </li>
                 <li className="flex items-center justify-between border-b border-[#1A1A1A] pb-3 mt-3">
                   <span className="flex items-center gap-3"><Glyph size={12} className="text-gold"/> Lecture Web immersive</span>
