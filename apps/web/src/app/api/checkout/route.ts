@@ -24,9 +24,9 @@ export async function POST(request: Request) {
           price_data: {
             currency: 'eur',
             product_data: {
-              name: 'Le Codex Édition Fondatrice',
-              description: 'Le Grand Codex NIDALUM - Édition Limitée.',
-              images: ['https://nidalumuniverse.com/images/codex-real.jpg'],
+              name: 'NIDALUM Founder Library',
+              description: 'Édition Fondatrice Limitée. Founder Access Included.',
+              images: ['https://nidalumuniverse.com/images/grimoire_front.png'],
             },
             unit_amount: 9900, // 99.00 EUR
           },
