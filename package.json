@@ -15,5 +15,6 @@
     "onlyBuiltDependencies": [
       "@tsparticles/engine"
     ]
-  }
+  },
+  "packageManager": "pnpm@9.15.4"
 }
