@@ -2,7 +2,7 @@ export default function ImpressumPage() {
   return (
     <main className="min-h-screen bg-black text-white p-8 md:p-24">
       <div className="max-w-3xl mx-auto space-y-12">
-        <h1 className="text-4xl font-playfair text-gold mb-12">IMPRESSUM</h1>
+        <h1 className="text-4xl font-playfair text-gold mb-12">IMPRESSUM NIDALUM UNIVERSE</h1>
         <div className="font-mono text-sm text-white/80 space-y-6 leading-relaxed">
           <p><strong>Angaben gem  5 TMG</strong></p>
           <p>
